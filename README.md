@@ -1,2 +1,4 @@
-# Algorithm-study
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+알고리즘공부 
+
+
+1월 28일부터 시작
