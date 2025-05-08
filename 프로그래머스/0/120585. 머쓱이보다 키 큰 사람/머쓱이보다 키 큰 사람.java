@@ -5,8 +5,6 @@ class Solution {
         for(int i=0; i<array.length;i++){
             if(array[i]>height){
                 answer++;
-            }else{
-                continue;
             }
         }        
         return answer;
