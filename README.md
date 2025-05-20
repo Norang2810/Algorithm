@@ -1,6 +1,7 @@
-알고리즘공부 
+📘 Algorithm Study Plan
 
+Start Date: April 20, 2025
 
-4월 20일부터 시작
+Goal: Reach Baekjoon Silver IV or higher
 
-목표: 26년도 되기전까지 백준 실버 실버4 이상
+Deadline: Before the year 2026 begins
