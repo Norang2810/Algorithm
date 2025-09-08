@@ -1,20 +1,27 @@
+import java.util.ArrayDeque;
+import java.util.Arrays;
+
 class Solution {
-    public String solution(String[] cards1, String[] cards2, String[] goal) {
-        int idx1 = 0; // cards1 배열의 인덱스
-        int idx2 = 0; // cards2 배열의 인덱스
-        
-        // goal 배열 순회
-        for (String currentStr : goal) {
-            // currentStr이 cards1[idx1] 또는 cards2[idx2]에 포함하는지 확인
-            if (idx1 < cards1.length && currentStr.equals(cards1[idx1])) {
-                idx1++; // cards1[idx1]에 포함하는 경우 idx1 증가
-            } else if (idx2 < cards2.length && currentStr.equals(cards2[idx2])) {
-                idx2++; // cards2[idx2]에 포함하는 경우 idx2 증가
-            } else {
-                return "No"; // 둘 다 포함하지 않는 경우
-            }
-        }
-        
-        return "Yes";
-    }
+	public String solution(String[] cards1, String[] cards2, String[] goal) {
+		
+		ArrayDeque<String> cardsDeque1 = new ArrayDeque<>(Arrays.asList(cards1));
+		ArrayDeque<String> cardsDeque2 = new ArrayDeque<>(Arrays.asList(cards2));
+		ArrayDeque<String> goalDeque = new ArrayDeque<>(Arrays.asList(goal));
+		
+		while(!goalDeque.isEmpty()) {
+			if (!cardsDeque1.isEmpty() && cardsDeque1.peekFirst().equals(goalDeque.peekFirst())) {
+				cardsDeque1.pollFirst();
+				goalDeque.pollFirst();
+			}else if (!cardsDeque2.isEmpty() && cardsDeque2.peekFirst().equals(goalDeque.peekFirst())) {
+				cardsDeque2.pollFirst();
+				goalDeque.pollFirst();
+			}else {
+				break;
+			}
+		}
+		
+		
+		return goalDeque.isEmpty() ? "Yes" : "No";
+
+	}
 }
