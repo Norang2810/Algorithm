@@ -1,13 +1,21 @@
-import java.util.*;
+
 class Solution {
     public int solution(int[] sides) {
-      
-      Arrays.sort(sides);  
+     
+        int sum = 0;
+        int max = 0;
         
-        if(sides[2] < sides[0] + sides[1]){
+        for(int side : sides){
+            sum += side;
+            if(side > max){
+                max = side;
+            }
+        }
+        
+        if(max < sum-max){
             return 1;
         }else{
-            return 2;   
+            return 2;
         }
-    }
+    }     
 }
