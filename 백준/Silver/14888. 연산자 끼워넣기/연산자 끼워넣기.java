@@ -1,63 +1,63 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-	static int N;
-	static int[] operator = new int[4];
-	static int[] number;
-	static int MAX = Integer.MIN_VALUE;
-	static int MIN = Integer.MAX_VALUE;
+    static int N;
+    static int[] num;
+    static int[] operator = new int[4];
+    static int MAX = Integer.MIN_VALUE;
+    static int MIN = Integer.MAX_VALUE;
 
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+        num = new int[N];
 
-		N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            num[i] = Integer.parseInt(st.nextToken());
+        }
 
-		number = new int[N];
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < 4; i++) {
+            operator[i] = Integer.parseInt(st.nextToken());
+        }
 
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < N; i++) {
-			number[i] = Integer.parseInt(st.nextToken());
-		}
+        Backtracking(num[0], 1);
+        System.out.println(MAX);
+        System.out.println(MIN);
+    }
 
-		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < 4; i++) {
-			operator[i] = Integer.parseInt(st.nextToken());
-		}
+    private static void Backtracking(int now, int index) {
+        if (index == N) {
+            MAX = Math.max(MAX, now);
+            MIN = Math.min(MIN, now);
+            return;
+        }
 
-		dfs(number[0], 1);
-
-		System.out.println(MAX);
-		System.out.println(MIN);
-	}
-
-	public static void dfs(int num, int idx) {
-
-		if (idx == N) {
-			MAX = Math.max(MAX, num);
-			MIN = Math.min(MIN, num);
-			return;
-		}
-		
-		
-		for (int i = 0; i < 4; i++) {
-			if (operator[i] > 0) {
-				
-				operator[i]--;
-				
-				
-				switch(i) {
-				
-				case 0 : dfs(num + number[idx], idx+1); break;
-				case 1 : dfs(num - number[idx], idx+1); break;
-				case 2 : dfs(num * number[idx], idx+1); break;
-				case 3 : dfs(num / number[idx], idx+1); break;
-				
-				}
-				
-				operator[i]++;
-			}
-		}
-	}
+        // + 선택
+        if (operator[0] > 0) {
+            operator[0]--;
+            Backtracking(now + num[index], index + 1);
+            operator[0]++;
+        }
+        // - 선택
+        if (operator[1] > 0) {
+            operator[1]--;
+            Backtracking(now - num[index], index + 1);
+            operator[1]++;
+        }
+        if (operator[2] > 0) {
+            operator[2]--;
+            Backtracking(now * num[index], index + 1);
+            operator[2]++;
+        }
+        if (operator[3] > 0) {
+            operator[3]--;
+            Backtracking(now / num[index], index + 1);
+            operator[3]++;
+        }
+    }
 }
